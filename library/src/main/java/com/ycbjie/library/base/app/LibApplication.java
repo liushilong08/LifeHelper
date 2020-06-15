@@ -25,10 +25,17 @@ import io.realm.RealmConfiguration;
  */
 public class LibApplication extends Application {
 
+    private static LibApplication instance;
+
+    public static LibApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         initRealm(this);
+        instance = this;
         AppConfig.INSTANCE.initConfig(this);
         //在子线程中初始化
         InitializeService.start(this);
